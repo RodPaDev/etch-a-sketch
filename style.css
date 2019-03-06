@@ -1,0 +1,33 @@
+*{
+    box-sizing: border-box;
+}
+.container{
+    border: 10px solid rgb(151, 67, 67);
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+    grid-template-rows: repeat(16, 1fr);
+    background-color: #c0c0c0;
+    height: 600px;
+    width: 600px;
+}
+
+.black{
+    background-color: #000;
+}
+
+.reset{
+    background-color: #c0c0c0;
+}
+
+.grid-element{
+    grid-area: auto;
+}
+
+#userInput{
+    width: 400px;
+}
