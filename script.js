@@ -1,8 +1,6 @@
 const grid = document.querySelector(".grid");
-
-const createClear = document.querySelector("#create");
-createClear.addEventListener("click", create_Clear);
-
+const clear = document.querySelector("#clear");
+clear.addEventListener("click", reset);
 function createDivs(size){
     for(i = 1; i < size * size + 1; i++){
         let createdDivs = document.createElement("div")
@@ -14,39 +12,65 @@ function createDivs(size){
     grid.style.gridTemplateRows = `repeat(${size}, 1fr)`
     updateColor();
 }
-
 function updateColor(){
     let divs = document.querySelectorAll(".grid-element")
     divs.forEach(function(div){
         div.addEventListener("mouseover", updateClass);
     });
     function updateClass(){
-        this.classList.add("black")
+        this.classList.remove(oldClassName)
+        this.classList.add(className)
     }
 }
-function create_Clear(){
-    reset();
-    const userInput = document.querySelector("#userInput");
-    const input = userInput.value;
-    let size = parseInt(input);
-    createDivs(size);
-}
-createDivs(16);
-updateColor();
-
-function reset(){
+//RealTime Reset
+function resetRT(size){
     let divs = document.querySelectorAll(".grid-element")
     divs.forEach(function(div){
-        div.classList.remove("black");
+        div.classList.remove(className);
         div.parentNode.removeChild(div);
         return false;
     });
-    createDivs(16);
+    createDivs(size);
 }
-
-
+let newSize = [0]
+let oldSize = [0]
+function reset(){
+    let divs = document.querySelectorAll(".grid-element")
+    divs.forEach(function(div){
+        div.classList.remove(className);
+        div.parentNode.removeChild(div);
+        return false;
+    });
+    createDivs(newSize);
+}
+// real time update of the grid size and grid creation
 const userInput = document.querySelector("#userInput");
 userInput.addEventListener("input", function(e){
+    resetRT();
     const sizeDisplay = document.querySelector("#sizeDisplay")
     sizeDisplay.textContent = `${userInput.value}x${userInput.value}`;
+    let size = parseInt(userInput.value);
+    newSize.unshift(size);
+    oldSize = newSize.pop();
+    createDivs(size);
+    return oldSize;
 })
+createDivs(16);
+updateColor();
+const li = document.querySelectorAll("ul li")
+li.forEach(function(e){
+    e.addEventListener("click", fetchClassName)  
+})
+let className = ["black"]
+let oldClassName = ["black"]
+function fetchClassName(e){
+    className.unshift(e.srcElement.className);
+    oldClassName = className.pop();
+    return;
+}
+/* For debugging remove
+function debug(){
+    console.log("deubg new: "+ newSize)
+    console.log("debug :" + oldSize)
+}
+*/

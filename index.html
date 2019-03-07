@@ -1,20 +1,36 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Etch A Sketch</title>
         <link href="./style.css" type="text/css" rel="stylesheet">
     </head>
     <body>
+        <center>
+        <h1>Etch-A-Sktech</h1>
         <div class="container">
             <div class="grid"></div>
         </div>
         <div>
                 <form>
-                    <h2>Choose your Canvas Size</h2>
-                    <input type="range" id="userInput" value="16" min="2" max="128">
-                    <button type="button" id="create">Create/Clear </button>
-                    <h2>Current Size of Canvas: <span id="sizeDisplay">16x16</span></h2>
+                    <h2>Choose your Canvas Size <span id="sizeDisplay">16x16</span></h2>
+                    <span class="rangeTxt">1x1</span><input type="range" id="userInput" value="16" min="2" max="128"><span class="rangeTxt">128x128</span>
+                    <button type="button" id="clear">Clear Canvas</button>
+                    <h2>Choose a colour</h2>
+                    <ul>
+                        <li class="black"></li>
+                        <li class="blue"></li>
+                        <li class="green"></li>
+                        <li class="yellow"></li>
+                        <li class="red"></li>
+                        <li class="purple"></li>
+                    </ul>
                 </form>
             </div>
+            <!--
+            For debugging remove comment
+            <button type="button" onclick="debug()" >debug</button>
+            -->
+        </center>
         <script src="./script.js"></script>
     </body>
 </html>
