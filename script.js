@@ -10,40 +10,9 @@ function createDivs(size){
     }
     grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`
     grid.style.gridTemplateRows = `repeat(${size}, 1fr)`
-    updateColor();
 }
-function updateColor(){
-    let divs = document.querySelectorAll(".grid-element")
-    divs.forEach(function(div){
-        div.addEventListener("mouseover", updateClass);
-    });
-    function updateClass(){
-        this.classList.remove(oldClassName)
-        this.classList.add(className)
-    }
-}
-//RealTime Reset
-function resetRT(size){
-    let divs = document.querySelectorAll(".grid-element")
-    divs.forEach(function(div){
-        div.classList.remove(className);
-        div.parentNode.removeChild(div);
-        return false;
-    });
-    createDivs(size);
-}
-let newSize = [0]
+let newSize = [16]
 let oldSize = [0]
-function reset(){
-    let divs = document.querySelectorAll(".grid-element")
-    divs.forEach(function(div){
-        div.classList.remove(className);
-        div.parentNode.removeChild(div);
-        return false;
-    });
-    createDivs(newSize);
-}
-// real time update of the grid size and grid creation
 const userInput = document.querySelector("#userInput");
 userInput.addEventListener("input", function(e){
     resetRT();
@@ -53,24 +22,116 @@ userInput.addEventListener("input", function(e){
     newSize.unshift(size);
     oldSize = newSize.pop();
     createDivs(size);
+    setColor();
     return oldSize;
 })
+function reset(){
+    let divs = document.querySelectorAll(".grid-element")
+    divs.forEach(function(div){
+        div.parentNode.removeChild(div);
+        return false;
+    });
+    createDivs(newSize);
+    setColor();
+}
+function resetRT(size){
+    let divs = document.querySelectorAll(".grid-element")
+    divs.forEach(function(div){
+        div.parentNode.removeChild(div);
+        return false;
+    });
+    createDivs(size);
+}
 createDivs(16);
-updateColor();
 const li = document.querySelectorAll("ul li")
 li.forEach(function(e){
     e.addEventListener("click", fetchClassName)  
 })
 let className = ["black"]
 let oldClassName = ["black"]
+let currentColor = "black"
 function fetchClassName(e){
     className.unshift(e.srcElement.className);
     oldClassName = className.pop();
-    return;
+    setColor();
 }
-/* For debugging remove
-function debug(){
-    console.log("deubg new: "+ newSize)
-    console.log("debug :" + oldSize)
+function setColor(){
+    let nodelist = document.querySelectorAll(".grid-element");
+    let div;
+    switch(className[0]){
+        case "greyscale":
+            for(div of nodelist){
+                div.style.backgroundColor = "rgba(0, 0, 0, 0.1)"
+                div.removeEventListener("mouseover", skittles);
+                div.removeEventListener("mouseover", updateColor);
+                div.addEventListener("mouseover", greyScale);
+            }
+            break;
+        case "black":
+            currentColor = "rgba(0, 0, 0, 0.99)"
+            for(div of nodelist){
+                div.removeEventListener("mouseover", greyScale);
+                div.removeEventListener("mouseover", skittles);
+                div.addEventListener("mouseover", updateColor);
+            }
+            break;
+        case "white":
+            currentColor = "rgba(255, 255, 255, 0.99)"
+            for(div of nodelist){
+                div.removeEventListener("mouseover", greyScale);
+                div.removeEventListener("mouseover", skittles);
+                div.addEventListener("mouseover", updateColor);
+            }
+            break;
+        case "red":
+            currentColor = "rgba(255, 0 ,0, 0.99)"
+            for(div of nodelist){
+                div.removeEventListener("mouseover", greyScale);
+                div.removeEventListener("mouseover", skittles);
+                div.addEventListener("mouseover", updateColor);
+            }
+            break;
+        case "green":
+            currentColor = "rgba(0, 255, 0, 0.99)"
+            for(div of nodelist){
+                div.removeEventListener("mouseover", greyScale);
+                div.removeEventListener("mouseover", skittles);
+                div.addEventListener("mouseover", updateColor);
+            }
+            break;
+        case "blue":
+            currentColor = "rgba(0, 0, 255, 0.99)"
+            for(div of nodelist){
+                div.removeEventListener("mouseover", greyScale);
+                div.removeEventListener("mouseover", skittles);
+                div.addEventListener("mouseover", updateColor);
+            }
+            break;
+        case "rainbow":
+            for(div of nodelist){
+                div.removeEventListener("mouseover", greyScale);
+                div.removeEventListener("mouseover", updateColor);
+                div.addEventListener("mouseover", skittles);
+            }
+            break;
+    }
 }
-*/
+function updateColor(e){
+        e.target.style.backgroundColor = currentColor //className[0] works but not what I want
+        console.log(currentColor)
+}
+function skittles(e){
+        let r = Math.floor(Math.random() * 256);
+        let g = Math.floor(Math.random() * 256);
+        let b = Math.floor(Math.random() * 256);
+        let rgb = `rgba(${r}, ${g}, ${b}, 0.5)`
+        e.target.style.backgroundColor = rgb;
+}
+function greyScale(e){
+    const value = getComputedStyle(e.target).getPropertyValue("background-color");
+    const parts = value.match(/[\d.]+/g);
+    parts[3] = Number(parts[3]) + 0.1;
+    let rgba = `rgba(0, 0, 0, ${parts[3]})`
+    e.target.style.backgroundColor = rgba;
+}
+setColor();
