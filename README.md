@@ -13,4 +13,6 @@ The user can also choose to paint like a pencil and it gets darker at each pass 
  -  User will be able to paint with a color chosen from a color picker
 
 ## Preview of DRAWINATOR 2000 
-![DRAWINATOR 2000](https://i.imgur.com/dg7cmoh.png)
+<p align="center">
+  <img width="460" height="300" src="https://i.imgur.com/dg7cmoh.png">
+</p>
