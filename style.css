@@ -156,12 +156,14 @@ ul, menu, dir {
 .rangeTxt {
   font-size: 18px;
   font-weight: bold;
+  position: relative;
+  top: 10px;
 }
 #userInput {
   width: 250px;
   margin: 0 20px;
   position: relative;
-  top: 6px;
+  top: 13px;
 }
 input[type=range] {
   height: 26px;
