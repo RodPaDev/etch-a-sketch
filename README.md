@@ -12,5 +12,5 @@ The user can also choose to paint like a pencil and it gets darker at each pass 
  -  Greyscale/Pencil will no longer reset on choose
  -  User will be able to paint with a color chosen from a color picker
 
-##Preview of DRAWINATOR 2000 
+## Preview of DRAWINATOR 2000 
 ![DRAWINATOR 2000](https://rodpa715.github.io/etch-a-sketch/images/preview.png)
