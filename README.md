@@ -14,5 +14,5 @@ The user can also choose to paint like a pencil and it gets darker at each pass 
 
 ## Preview of DRAWINATOR 2000 
 <p align="center">
-  <img width="460" height="300" src="https://i.imgur.com/dg7cmoh.png">
+  <img src="https://i.imgur.com/dg7cmoh.png">
 </p>
