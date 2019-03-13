@@ -59,14 +59,6 @@ function setColor(){
     let nodelist = document.querySelectorAll(".grid-element");
     let div;
     switch(className[0]){
-        case "greyscale":
-            for(div of nodelist){
-                div.style.backgroundColor = "rgba(0, 0, 0, 0.1)"
-                div.removeEventListener("mouseover", skittles);
-                div.removeEventListener("mouseover", updateColor);
-                div.addEventListener("mouseover", greyScale);
-            }
-            break;
         case "black":
             currentColor = "rgba(0, 0, 0, 0.99)"
             for(div of nodelist){
@@ -112,6 +104,22 @@ function setColor(){
                 div.removeEventListener("mouseover", greyScale);
                 div.removeEventListener("mouseover", updateColor);
                 div.addEventListener("mouseover", skittles);
+            }
+            break;
+        case "erase":
+            currentColor = "rgba(0, 0, 0, 0.1)"
+            for(div of nodelist){
+                div.removeEventListener("mouseover", greyScale);
+                div.removeEventListener("mouseover", skittles);
+                div.addEventListener("mouseover", updateColor);
+            }
+            break;
+        case "greyscale":
+            for(div of nodelist){
+                div.style.backgroundColor = "rgba(0, 0, 0, 0.1)"
+                div.removeEventListener("mouseover", skittles);
+                div.removeEventListener("mouseover", updateColor);
+                div.addEventListener("mouseover", greyScale);
             }
             break;
     }
