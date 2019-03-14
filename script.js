@@ -1,4 +1,19 @@
 const grid = document.querySelector(".grid");
+
+function paint(){
+    const grid = document.querySelector(".grid");
+    grid.addEventListener("mousedown", setColor);
+    grid.addEventListener("mouseup", stopFunction);
+    grid.addEventListener("dragend", stopFunction);
+}
+function stopFunction(){
+    let nodelist = document.querySelectorAll(".grid-element");
+    for(let div of nodelist){
+        div.removeEventListener("mousemove", greyScale);
+        div.removeEventListener("mousemove", skittles);
+        div.removeEventListener("mousemove", updateColor);
+    }
+}
 const clear = document.querySelector("#clear");
 clear.addEventListener("click", reset);
 function createDivs(size){
@@ -22,7 +37,7 @@ userInput.addEventListener("input", function(e){
     newSize.unshift(size);
     oldSize = newSize.pop();
     createDivs(size);
-    setColor();
+    paint();
     return oldSize;
 })
 function reset(){
@@ -32,7 +47,7 @@ function reset(){
         return false;
     });
     createDivs(newSize);
-    setColor();
+    paint();
 }
 function resetRT(size){
     let divs = document.querySelectorAll(".grid-element")
@@ -53,7 +68,7 @@ let currentColor = "black"
 function fetchClassName(e){
     className.unshift(e.srcElement.className);
     oldClassName = className.pop();
-    setColor();
+    paint();
 }
 function setColor(){
     let nodelist = document.querySelectorAll(".grid-element");
@@ -62,64 +77,64 @@ function setColor(){
         case "black":
             currentColor = "rgba(0, 0, 0, 0.99)"
             for(div of nodelist){
-                div.removeEventListener("mouseover", greyScale);
-                div.removeEventListener("mouseover", skittles);
-                div.addEventListener("mouseover", updateColor);
+                div.removeEventListener("mousemove", greyScale);
+                div.removeEventListener("mousemove", skittles);
+                div.addEventListener("mousemove", updateColor);
             }
             break;
         case "white":
             currentColor = "rgba(255, 255, 255, 0.99)"
             for(div of nodelist){
-                div.removeEventListener("mouseover", greyScale);
-                div.removeEventListener("mouseover", skittles);
-                div.addEventListener("mouseover", updateColor);
+                div.removeEventListener("mousemove", greyScale);
+                div.removeEventListener("mousemove", skittles);
+                div.addEventListener("mousemove", updateColor);
             }
             break;
         case "red":
             currentColor = "rgba(255, 0 ,0, 0.99)"
             for(div of nodelist){
-                div.removeEventListener("mouseover", greyScale);
-                div.removeEventListener("mouseover", skittles);
-                div.addEventListener("mouseover", updateColor);
+                div.removeEventListener("mousemove", greyScale);
+                div.removeEventListener("mousemove", skittles);
+                div.addEventListener("mousemove", updateColor);
             }
             break;
         case "green":
             currentColor = "rgba(0, 255, 0, 0.99)"
             for(div of nodelist){
-                div.removeEventListener("mouseover", greyScale);
-                div.removeEventListener("mouseover", skittles);
-                div.addEventListener("mouseover", updateColor);
+                div.removeEventListener("mousemove", greyScale);
+                div.removeEventListener("mousemove", skittles);
+                div.addEventListener("mousemove", updateColor);
             }
             break;
         case "blue":
             currentColor = "rgba(0, 0, 255, 0.99)"
             for(div of nodelist){
-                div.removeEventListener("mouseover", greyScale);
-                div.removeEventListener("mouseover", skittles);
-                div.addEventListener("mouseover", updateColor);
+                div.removeEventListener("mousemove", greyScale);
+                div.removeEventListener("mousemove", skittles);
+                div.addEventListener("mousemove", updateColor);
             }
             break;
         case "rainbow":
             for(div of nodelist){
-                div.removeEventListener("mouseover", greyScale);
-                div.removeEventListener("mouseover", updateColor);
-                div.addEventListener("mouseover", skittles);
+                div.removeEventListener("mousemove", greyScale);
+                div.removeEventListener("mousemove", updateColor);
+                div.addEventListener("mousemove", skittles);
             }
             break;
         case "erase":
             currentColor = "rgba(0, 0, 0, 0.1)"
             for(div of nodelist){
-                div.removeEventListener("mouseover", greyScale);
-                div.removeEventListener("mouseover", skittles);
-                div.addEventListener("mouseover", updateColor);
+                div.removeEventListener("mousemove", greyScale);
+                div.removeEventListener("mousemove", skittles);
+                div.addEventListener("mousemove", updateColor);
             }
             break;
         case "greyscale":
             for(div of nodelist){
                 div.style.backgroundColor = "rgba(0, 0, 0, 0.1)"
-                div.removeEventListener("mouseover", skittles);
-                div.removeEventListener("mouseover", updateColor);
-                div.addEventListener("mouseover", greyScale);
+                div.removeEventListener("mousemove", skittles);
+                div.removeEventListener("mousemove", updateColor);
+                div.addEventListener("mousemove", greyScale);
             }
             break;
     }
@@ -142,4 +157,5 @@ function greyScale(e){
     let rgba = `rgba(0, 0, 0, ${parts[3]})`
     e.target.style.backgroundColor = rgba;
 }
-setColor();
+paint();
+

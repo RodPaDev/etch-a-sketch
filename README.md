@@ -8,9 +8,9 @@ There are a bunch of preset colors that the user can choose from.
 The user can also choose to paint like a pencil and it gets darker at each pass or even to paint a random color at each pass.
 
 ### Features to be added next:
- - User will only be able to paint if mouses down
- -  Greyscale/Pencil will no longer reset on choose
- -  User will be able to paint with a color chosen from a color picker
+ - [x] User will only be able to paint if mouse is down 
+ - [ ] Greyscale/Pencil will no longer reset on choose
+ - [ ] User will be able to paint with a color chosen from a color picker
 
 ##Preview of DRAWINATOR 2000 
 ![DRAWINATOR 2000](https://rodpa715.github.io/etch-a-sketch/images/preview.png)
